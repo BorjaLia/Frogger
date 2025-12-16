@@ -1,0 +1,156 @@
+#include "game_manager.h"
+
+#include "SFML/Graphics.hpp"
+
+#include "globals.h"
+#include "scene_manager.h"
+#include "main_menu_loop.h"
+#include "credit_loop.h"
+#include "help_loop.h"
+
+#include <iostream>
+
+namespace frogger
+{
+	static void MainLoop();
+
+	static void Init();
+
+	static void	Input();
+	static void Update();
+	static void Draw();
+}
+
+namespace frogger
+{
+	void PlayGame()
+	{
+		MainLoop();
+	}
+
+	static void MainLoop()
+	{
+		Init();
+
+		while (global::window.isOpen())
+		{
+			if (!global::isRunning)
+			{
+				global::window.close();
+			}
+			while (const std::optional event = global::window.pollEvent())
+			{
+				if (event->is<sf::Event::Closed>())
+				{
+					global::window.close();
+				}
+			}
+			Input();
+			Update();
+			Draw();
+		}
+	}
+
+	static void Init()
+	{
+			main_menu::Init();
+			credits::Init();
+			help::Init();
+	}
+
+	static void Input()
+	{
+		switch (scene::currentScene)
+		{
+		case scene::Scene::MAIN_MENU:
+		{
+			main_menu::Input();
+			break;
+		}
+		case scene::Scene::CREDITS:
+		{
+			credits::Input();
+			break;
+		}
+		case scene::Scene::HELP:
+		{
+			help::Input();
+			break;
+		}
+		case scene::Scene::GAMEPLAY:
+		{
+
+			break;
+		}
+		default:
+		{
+
+			break;
+		}
+		}
+	}
+	static void Update()
+	{
+		switch (scene::currentScene)
+		{
+		case scene::Scene::MAIN_MENU:
+		{
+			main_menu::Update();
+			break;
+		}
+		case scene::Scene::CREDITS:
+		{
+			credits::Update();
+			break;
+		}
+		case scene::Scene::HELP:
+		{
+			help::Update();
+			break;
+		}
+		case scene::Scene::GAMEPLAY:
+		{
+
+			break;
+		}
+		default:
+		{
+
+			break;
+		}
+		}
+	}
+	static void Draw()
+	{
+		global::window.clear(sf::Color(255,255,255));
+		switch (scene::currentScene)
+		{
+		case scene::Scene::MAIN_MENU:
+		{
+			main_menu::Draw();
+			break;
+		}
+		case scene::Scene::CREDITS:
+		{
+			credits::Draw();
+			break;
+		}
+		case scene::Scene::HELP:
+		{
+			help::Draw();
+			break;
+		}
+		case scene::Scene::GAMEPLAY:
+		{
+
+			break;
+		}
+		default:
+		{
+
+			break;
+		}
+		}
+		global::window.display();
+	}
+}
