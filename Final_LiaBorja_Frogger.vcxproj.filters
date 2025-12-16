@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{a3bc251f-3f8e-4516-851c-dfc520be5f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game\GameLoops">
+      <UniqueIdentifier>{f43b4850-2fc9-456e-8cea-84b60c5c9e54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UI Elements">
+      <UniqueIdentifier>{b5e9df16-a926-4670-805a-2c2406df6b2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Math">
+      <UniqueIdentifier>{14f4135a-6130-495e-a9c3-1da32eb2060d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Globals">
+      <UniqueIdentifier>{c14dee6a-6476-4fd5-8903-e87518972d33}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_manager.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math_blib.cpp">
+      <Filter>src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\label.cpp">
+      <Filter>src\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\button.cpp">
+      <Filter>src\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main_menu_loop.cpp">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClCompile>
+    <ClCompile Include="src\globals.cpp">
+      <Filter>src\Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene_manager.cpp">
+      <Filter>src\Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\credit_loop.cpp">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClCompile>
+    <ClCompile Include="src\help_loop.cpp">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameplay_loop.cpp">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\game_manager.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\label.h">
+      <Filter>src\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math_blib.h">
+      <Filter>src\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\button.h">
+      <Filter>src\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\main_menu_loop.h">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClInclude>
+    <ClInclude Include="src\globals.h">
+      <Filter>src\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene_manager.h">
+      <Filter>src\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\credit_loop.h">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClInclude>
+    <ClInclude Include="src\help_loop.h">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameplay_loop.h">
+      <Filter>src\Game\GameLoops</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
