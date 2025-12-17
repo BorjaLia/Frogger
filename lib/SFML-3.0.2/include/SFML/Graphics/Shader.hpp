@@ -57,7 +57,7 @@ public:
     /// \brief Types of shaders
     ///
     ////////////////////////////////////////////////////////////
-    enum class Type
+    enum class Path
     {
         Vertex,   //!< %Vertex shader
         Geometry, //!< Geometry shader
@@ -144,7 +144,7 @@ public:
     /// \see `loadFromFile`, `loadFromMemory`, `loadFromStream`
     ///
     ////////////////////////////////////////////////////////////
-    Shader(const std::filesystem::path& filename, Type type);
+    Shader(const std::filesystem::path& filename, Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct from vertex and fragment shader files
@@ -209,7 +209,7 @@ public:
     /// \see `loadFromFile`, `loadFromMemory`, `loadFromStream`
     ///
     ////////////////////////////////////////////////////////////
-    Shader(std::string_view shader, Type type);
+    Shader(std::string_view shader, Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct from vertex and fragment shaders in memory
@@ -272,7 +272,7 @@ public:
     /// \see `loadFromFile`, `loadFromMemory`, `loadFromStream`
     ///
     ////////////////////////////////////////////////////////////
-    Shader(InputStream& stream, Type type);
+    Shader(InputStream& stream, Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct from vertex and fragment shader streams
@@ -336,7 +336,7 @@ public:
     /// \see `loadFromMemory`, `loadFromStream`
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] bool loadFromFile(const std::filesystem::path& filename, Type type);
+    [[nodiscard]] bool loadFromFile(const std::filesystem::path& filename, Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load both the vertex and fragment shaders from files
@@ -402,7 +402,7 @@ public:
     /// \see `loadFromFile`, `loadFromStream`
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] bool loadFromMemory(std::string_view shader, Type type);
+    [[nodiscard]] bool loadFromMemory(std::string_view shader, Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load both the vertex and fragment shaders from source codes in memory
@@ -467,7 +467,7 @@ public:
     /// \see `loadFromFile`, `loadFromMemory`
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] bool loadFromStream(InputStream& stream, Type type);
+    [[nodiscard]] bool loadFromStream(InputStream& stream, Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load both the vertex and fragment shaders from custom streams

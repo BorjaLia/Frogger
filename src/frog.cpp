@@ -8,7 +8,7 @@ namespace frogger
 {
 	namespace frog
 	{
-		static void prepareJump(vec::Vector2 dir, bool& preparingJump);
+		static void PrepareJump(vec::Vector2 dir, bool& preparingJump);
 		static void JumpUpdate();
 		static void BordersUpdate();
 	}
@@ -67,7 +67,7 @@ namespace frogger
 			{
 				if (sf::Keyboard::isKeyPressed(player.upKey[k]))
 				{
-					prepareJump(vec::Vector2(0.0f, -1.0f), preparingJump);
+					PrepareJump(vec::Vector2(0.0f, -1.0f), preparingJump);
 				}
 			}
 
@@ -77,7 +77,7 @@ namespace frogger
 				{
 					if (sf::Keyboard::isKeyPressed(player.leftKey[k]))
 					{
-						prepareJump(vec::Vector2(-1.0f, 0.0f), preparingJump);
+						PrepareJump(vec::Vector2(-1.0f, 0.0f), preparingJump);
 					}
 				}
 			}
@@ -88,7 +88,7 @@ namespace frogger
 				{
 					if (sf::Keyboard::isKeyPressed(player.dowKey[k]))
 					{
-						prepareJump(vec::Vector2(0.0f, 1.0f), preparingJump);
+						PrepareJump(vec::Vector2(0.0f, 1.0f), preparingJump);
 					}
 				}
 			}
@@ -99,7 +99,7 @@ namespace frogger
 				{
 					if (sf::Keyboard::isKeyPressed(player.rightKey[k]))
 					{
-						prepareJump(vec::Vector2(1.0f, 0.0f), preparingJump);
+						PrepareJump(vec::Vector2(1.0f, 0.0f), preparingJump);
 					}
 				}
 			}
@@ -180,12 +180,17 @@ namespace frogger
 			player.lastJump = defaults::lastJump;
 		}
 
+		void Move(vec::Vector2 dir)
+		{
+			player.pos += dir * global::deltaTime;
+		}
+
 		void TakeHit()
 		{
 			player.isAlive = false;
 		}
 
-		static void prepareJump(vec::Vector2 dir, bool& preparingJump)
+		static void PrepareJump(vec::Vector2 dir, bool& preparingJump)
 		{
 			std::cout << "charge... " << player.jumpForce << std::endl;
 

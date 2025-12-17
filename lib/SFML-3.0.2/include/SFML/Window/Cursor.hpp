@@ -86,7 +86,7 @@ public:
     ///  ** On Windows and macOS, double-headed arrows are used
     ///
     ////////////////////////////////////////////////////////////
-    enum class Type
+    enum class Path
     {
         Arrow,                  //!< Arrow cursor (default)
         ArrowWait,              //!< Busy arrow cursor
@@ -191,7 +191,7 @@ public:
     ///         system
     ///
     ////////////////////////////////////////////////////////////
-    explicit Cursor(Type type);
+    explicit Cursor(Path path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Create a cursor with the provided image
@@ -239,7 +239,7 @@ public:
     ///         `std::nullopt` otherwise
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] static std::optional<Cursor> createFromSystem(Type type);
+    [[nodiscard]] static std::optional<Cursor> createFromSystem(Path path);
 
 private:
     friend class WindowBase;

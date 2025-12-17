@@ -83,7 +83,7 @@ public:
     /// \param type Type of primitive
     ///
     ////////////////////////////////////////////////////////////
-    explicit VertexBuffer(PrimitiveType type);
+    explicit VertexBuffer(PrimitiveType path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct a `VertexBuffer` with a specific usage specifier
@@ -105,7 +105,7 @@ public:
     /// \param usage Usage specifier
     ///
     ////////////////////////////////////////////////////////////
-    VertexBuffer(PrimitiveType type, Usage usage);
+    VertexBuffer(PrimitiveType path, Usage usage);
 
     ////////////////////////////////////////////////////////////
     /// \brief Copy constructor
@@ -251,7 +251,7 @@ public:
     /// \param type Type of primitive
     ///
     ////////////////////////////////////////////////////////////
-    void setPrimitiveType(PrimitiveType type);
+    void setPrimitiveType(PrimitiveType path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the type of primitives drawn by the vertex buffer

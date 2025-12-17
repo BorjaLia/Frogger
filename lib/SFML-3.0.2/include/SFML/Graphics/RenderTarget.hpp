@@ -318,7 +318,7 @@ public:
     ////////////////////////////////////////////////////////////
     void draw(const Vertex*       vertices,
               std::size_t         vertexCount,
-              PrimitiveType       type,
+              PrimitiveType       path,
               const RenderStates& states = RenderStates::Default);
 
     ////////////////////////////////////////////////////////////
@@ -531,7 +531,7 @@ private:
     /// \param vertexCount Number of vertices to use when drawing
     ///
     ////////////////////////////////////////////////////////////
-    void drawPrimitives(PrimitiveType type, std::size_t firstVertex, std::size_t vertexCount);
+    void drawPrimitives(PrimitiveType path, std::size_t firstVertex, std::size_t vertexCount);
 
     ////////////////////////////////////////////////////////////
     /// \brief Clean up environment after drawing

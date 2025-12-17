@@ -397,7 +397,7 @@ private:
     /// \brief Open from stream and print errors with custom message
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] bool openFromStreamImpl(InputStream& stream, std::string_view type);
+    [[nodiscard]] bool openFromStreamImpl(InputStream& stream, std::string_view path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Find or create the glyphs page corresponding to the given character size

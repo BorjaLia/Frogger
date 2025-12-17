@@ -41,7 +41,7 @@ namespace sf::Sensor
 /// \brief Sensor type
 ///
 ////////////////////////////////////////////////////////////
-enum class Type
+enum class Path
 {
     Accelerometer,    //!< Measures the raw acceleration (m/s^2)
     Gyroscope,        //!< Measures the raw rotation rates (radians/s)
@@ -62,7 +62,7 @@ static constexpr unsigned int Count{6}; //!< The total number of sensor types
 /// \return `true` if the sensor is available, `false` otherwise
 ///
 ////////////////////////////////////////////////////////////
-[[nodiscard]] SFML_WINDOW_API bool isAvailable(Type sensor);
+[[nodiscard]] SFML_WINDOW_API bool isAvailable(Path sensor);
 
 ////////////////////////////////////////////////////////////
 /// \brief Enable or disable a sensor
@@ -77,7 +77,7 @@ static constexpr unsigned int Count{6}; //!< The total number of sensor types
 /// \param enabled `true` to enable, `false` to disable
 ///
 ////////////////////////////////////////////////////////////
-SFML_WINDOW_API void setEnabled(Type sensor, bool enabled);
+SFML_WINDOW_API void setEnabled(Path sensor, bool enabled);
 
 ////////////////////////////////////////////////////////////
 /// \brief Get the current sensor value
@@ -87,7 +87,7 @@ SFML_WINDOW_API void setEnabled(Type sensor, bool enabled);
 /// \return The current sensor value
 ///
 ////////////////////////////////////////////////////////////
-[[nodiscard]] SFML_WINDOW_API Vector3f getValue(Type sensor);
+[[nodiscard]] SFML_WINDOW_API Vector3f getValue(Path sensor);
 } // namespace sf::Sensor
 
 

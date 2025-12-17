@@ -66,7 +66,7 @@ public:
     /// \param vertexCount Initial number of vertices in the array
     ///
     ////////////////////////////////////////////////////////////
-    explicit VertexArray(PrimitiveType type, std::size_t vertexCount = 0);
+    explicit VertexArray(PrimitiveType path, std::size_t vertexCount = 0);
 
     ////////////////////////////////////////////////////////////
     /// \brief Return the vertex count
@@ -154,7 +154,7 @@ public:
     /// \param type Type of primitive
     ///
     ////////////////////////////////////////////////////////////
-    void setPrimitiveType(PrimitiveType type);
+    void setPrimitiveType(PrimitiveType path);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the type of primitives drawn by the vertex array

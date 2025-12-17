@@ -4,7 +4,7 @@
 #include "scene_manager.h"
 #include "button.h"
 #include "frog.h"
-#include "danger.h"
+#include "entity.h"
 
 namespace frogger
 {
@@ -35,7 +35,7 @@ namespace frogger
 		void Init()
 		{
 			frog::Init();
-			danger::Init();
+			object::Init();
 
 			pauseButton = button::Init({ (global::screenWidth / 2.0f) - defaultSize.y / 2.0f ,0.0f }, { defaultSize.y,defaultSize.y }, "||");
 			defaultPos.y += defaultSize.y * 1.5f;
@@ -85,7 +85,7 @@ namespace frogger
 		void Reset()
 		{
 			frog::Reset();
-			danger::Reset();
+			object::Reset();
 			isPaused = false;
 		}
 
@@ -115,7 +115,7 @@ namespace frogger
 			}
 
 			frog::Update();
-			danger::Update();
+			object::Update();
 
 			if (pauseButton.clicked)
 			{
@@ -123,11 +123,26 @@ namespace frogger
 				resumeButton.clicked = false;
 			}
 
-			for (int d = 0; d < danger::dangers.size(); d++)
+			for (int d = 0; d < object::entities.size(); d++)
 			{
-				if (CheckCollision(frog::player.pos, frog::player.coll, danger::dangers[d].pos, danger::dangers[d].coll))
+				object::Entity& currentEntity = object::entities[d];
+				if (CheckCollision(frog::player.pos, frog::player.coll, currentEntity.pos, currentEntity.coll))
 				{
-					frog::TakeHit();
+					switch (currentEntity.type)
+					{
+					case object::Type::DANGER:
+					{
+						frog::TakeHit();
+						break;
+					}
+					case object::Type::PLATFORM:
+					{
+						frog::Move(currentEntity.dir);
+						break;
+					}
+					default:
+						break;
+					}
 				}
 			}
 		}
@@ -150,7 +165,7 @@ namespace frogger
 
 		static void NormalDraw()
 		{
-			danger::Draw();
+			object::Draw();
 			frog::Draw();
 			button::Draw(pauseButton);
 		}

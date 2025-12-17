@@ -55,6 +55,7 @@ namespace frogger
 
 		void Reset();
 
+		void Move(vec::Vector2 dir);
 		void TakeHit();
 	}
 }

@@ -7,9 +7,15 @@
 
 namespace frogger
 {
-	namespace danger
+	namespace object
 	{
 		enum Type
+		{
+			DANGER,
+			PLATFORM
+		};
+
+		enum PathType
 		{
 			STATIC,
 			OPEN_PATH,
@@ -17,9 +23,10 @@ namespace frogger
 			FOLLOW
 		};
 
-		struct Danger
+		struct Entity
 		{
-			Type type = Type::STATIC;
+			Type type = Type::DANGER;
+			PathType pathType = PathType::STATIC;
 
 			vec::Vector2 pos = { 0.0f,0.0f };
 			vec::Vector2 dir = { 0.0f,0.0f };
@@ -38,7 +45,7 @@ namespace frogger
 			float animFrameIncrease = 30.0f;
 		};
 
-		extern std::vector<Danger> dangers;
+		extern std::vector<Entity> entities;
 
 		void Init();
 

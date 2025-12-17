@@ -291,7 +291,7 @@ public:
     ////////////////////////////////////////////////////////////
     struct SensorChanged
     {
-        Sensor::Type type{}; //!< Type of the sensor
+        Sensor::Path path{}; //!< Type of the sensor
         Vector3f     value;  //!< Current value of the sensor on the X, Y, and Z axes
     };
 

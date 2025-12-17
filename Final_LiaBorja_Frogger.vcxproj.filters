@@ -61,7 +61,7 @@
     <ClCompile Include="src\frog.cpp">
       <Filter>src\Game\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="src\danger.cpp">
+    <ClCompile Include="src\entity.cpp">
       <Filter>src\Game\Entity</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,7 +99,7 @@
     <ClInclude Include="src\frog.h">
       <Filter>src\Game\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="src\danger.h">
+    <ClInclude Include="src\entity.h">
       <Filter>src\Game\Entity</Filter>
     </ClInclude>
   </ItemGroup>
