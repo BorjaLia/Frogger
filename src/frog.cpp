@@ -10,21 +10,24 @@ namespace frogger
 	{
 		static void prepareJump(vec::Vector2 dir, bool& preparingJump);
 		static void JumpUpdate();
+		static void BordersUpdate();
 	}
 
 	namespace frog
 	{
 		namespace defaults
 		{
+			const bool isAlive = true;
+
 			const vec::Vector2 size = { 20.0f,20.0f };
 
 			const vec::Vector2 pos = { (global::screenWidth / 2.0f),(global::screenHeight * 0.75f) };
 			const vec::Vector2 dir = { 0.0f,0.0f };
 
-			const float jumpForceMultiplier = 500.0f;
+			const float jumpForceMultiplier = 4000.0f;
 			const float jumpForce = 0.0f;
 			const float maxJumpForce = 2000.0f;
-			const float deceleraton = 0.1f;
+			const float deceleraton = 8000.0f;
 
 			const vec::Vector2 coll = { 18.0f,18.0f };
 
@@ -114,6 +117,7 @@ namespace frogger
 		void Update()
 		{
 			JumpUpdate();
+			BordersUpdate();
 		}
 
 		
@@ -144,6 +148,8 @@ namespace frogger
 
 		void Reset()
 		{
+			player.isAlive = defaults::isAlive;
+
 			player.pos = defaults::pos;
 			player.dir = defaults::dir;
 
@@ -188,13 +194,47 @@ namespace frogger
 			{
 				player.pos += player.dir * global::deltaTime;
 
-				player.dir -= player.dir * player.deceleraton * global::deltaTime;
+				float currentSpeed = player.dir.magnitude();
+				float speedDrop = player.deceleraton * global::deltaTime;
 
-				if (player.dir.magnitude() < player.maxJumpForce * 0.1f)
+				if (currentSpeed > speedDrop)
 				{
-					player.dir = defaults::dir;
+					player.dir = (player.dir * (1.0f / currentSpeed)) * (currentSpeed - speedDrop);
+				}
+				else
+				{
+					player.dir = { 0.0f, 0.0f };
 					player.isJumping = false;
 				}
+			}
+		}
+
+		static void BordersUpdate()
+		{
+			float speedMultiplier = 0.4f;
+
+			if (player.pos.x < 0.0f && player.dir.x < 0.0f)
+			{
+				player.dir.x *= -speedMultiplier;
+				player.pos.x = 0.0f;
+			}
+
+			if (player.pos.x + (player.size.x / 2.0f) > global::screenWidth && player.dir.x > 0.0f)
+			{
+				player.dir.x *= -speedMultiplier;
+				player.pos.x = player.pos.x + (player.size.x / 2.0f);
+			}
+
+			if (player.pos.y < 0.0f && player.dir.y < 0.0f)
+			{
+				player.dir.y *= -speedMultiplier;
+				player.pos.y = 0.0f;
+			}
+
+			if (player.pos.y + (player.size.y / 2.0f) > global::screenHeight && player.dir.y > 0.0f)
+			{
+				player.dir.y *= -speedMultiplier;
+				player.pos.y = player.pos.y + (player.size.y / 2.0f);
 			}
 		}
 	}

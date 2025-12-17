@@ -11,6 +11,8 @@ namespace frogger
 	{
 		struct Frog
 		{
+			bool isAlive = true;
+
 			vec::Vector2 pos = {0.0f,0.0f};
 			vec::Vector2 dir = {0.0f,0.0f};
 
