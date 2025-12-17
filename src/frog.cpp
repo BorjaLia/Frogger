@@ -67,7 +67,7 @@ namespace frogger
 			{
 				if (sf::Keyboard::isKeyPressed(player.upKey[k]))
 				{
-					prepareJump(vec::Vector2(0.0f,-1.0f),preparingJump);
+					prepareJump(vec::Vector2(0.0f, -1.0f), preparingJump);
 				}
 			}
 
@@ -116,11 +116,13 @@ namespace frogger
 
 		void Update()
 		{
-			JumpUpdate();
-			BordersUpdate();
+			if (player.isAlive)
+			{
+				JumpUpdate();
+				BordersUpdate();
+			}
 		}
 
-		
 		void Draw()
 		{
 #ifdef _DEBUG
@@ -135,6 +137,10 @@ namespace frogger
 			if (player.maxJump)
 			{
 				collShape.setFillColor(sf::Color::Blue);
+			}
+			if (!player.isAlive)
+			{
+				collShape.setFillColor(sf::Color::Red);
 			}
 			global::window.draw(collShape);
 
@@ -172,6 +178,11 @@ namespace frogger
 
 			player.jumpInterval = defaults::jumpInterval;
 			player.lastJump = defaults::lastJump;
+		}
+
+		void TakeHit()
+		{
+			player.isAlive = false;
 		}
 
 		static void prepareJump(vec::Vector2 dir, bool& preparingJump)

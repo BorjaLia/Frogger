@@ -67,10 +67,6 @@ namespace frogger
 		case scene::Scene::MAIN_MENU:
 		{
 			main_menu::Input();
-			if (scene::currentScene == scene::Scene::GAMEPLAY)
-			{
-				gameplay::Reset();
-			}
 			break;
 		}
 		case scene::Scene::CREDITS:
@@ -104,6 +100,10 @@ namespace frogger
 		case scene::Scene::MAIN_MENU:
 		{
 			main_menu::Update();
+			if (scene::currentScene == scene::Scene::GAMEPLAY)
+			{
+				gameplay::Reset();
+			}
 			break;
 		}
 		case scene::Scene::CREDITS:

@@ -54,5 +54,7 @@ namespace frogger
 		void Draw();
 
 		void Reset();
+
+		void TakeHit();
 	}
 }
