@@ -7,6 +7,7 @@
 #include "main_menu_loop.h"
 #include "credit_loop.h"
 #include "help_loop.h"
+#include "gameplay_loop.h"
 
 #include <iostream>
 
@@ -53,9 +54,10 @@ namespace frogger
 
 	static void Init()
 	{
-			main_menu::Init();
-			credits::Init();
-			help::Init();
+		main_menu::Init();
+		credits::Init();
+		help::Init();
+		gameplay::Init();
 	}
 
 	static void Input()
@@ -65,6 +67,10 @@ namespace frogger
 		case scene::Scene::MAIN_MENU:
 		{
 			main_menu::Input();
+			if (scene::currentScene == scene::Scene::GAMEPLAY)
+			{
+				gameplay::Reset();
+			}
 			break;
 		}
 		case scene::Scene::CREDITS:
@@ -79,7 +85,7 @@ namespace frogger
 		}
 		case scene::Scene::GAMEPLAY:
 		{
-
+			gameplay::Input();
 			break;
 		}
 		default:
@@ -91,6 +97,8 @@ namespace frogger
 	}
 	static void Update()
 	{
+		global::Update();
+
 		switch (scene::currentScene)
 		{
 		case scene::Scene::MAIN_MENU:
@@ -110,7 +118,7 @@ namespace frogger
 		}
 		case scene::Scene::GAMEPLAY:
 		{
-
+			gameplay::Update();
 			break;
 		}
 		default:
@@ -122,7 +130,7 @@ namespace frogger
 	}
 	static void Draw()
 	{
-		global::window.clear(sf::Color(255,255,255));
+		global::window.clear(sf::Color(255, 255, 255));
 		switch (scene::currentScene)
 		{
 		case scene::Scene::MAIN_MENU:
@@ -142,7 +150,7 @@ namespace frogger
 		}
 		case scene::Scene::GAMEPLAY:
 		{
-
+			gameplay::Draw();
 			break;
 		}
 		default:

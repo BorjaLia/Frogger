@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\button.cpp" />
     <ClCompile Include="src\credit_loop.cpp" />
+    <ClCompile Include="src\frog.cpp" />
     <ClCompile Include="src\gameplay_loop.cpp" />
     <ClCompile Include="src\game_manager.cpp" />
     <ClCompile Include="src\globals.cpp" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="src\button.h" />
     <ClInclude Include="src\credit_loop.h" />
+    <ClInclude Include="src\frog.h" />
     <ClInclude Include="src\gameplay_loop.h" />
     <ClInclude Include="src\game_manager.h" />
     <ClInclude Include="src\globals.h" />

@@ -9,5 +9,7 @@ namespace frogger
 		void Input();
 		void Update();
 		void Draw();
+
+		void Reset();
 	}
 }

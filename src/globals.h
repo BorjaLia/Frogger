@@ -10,6 +10,9 @@ namespace frogger
 
 		extern float deltaTime;
 
+		extern float timeCounter;
+		extern int frameCounter;
+
 		extern float screenWidth;
 		extern float screenHeight;
 
@@ -17,5 +20,7 @@ namespace frogger
 		extern sf::View camera;
 
 		extern sf::Font font;
+
+		void Update();
 	}
 }

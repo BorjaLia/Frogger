@@ -1,8 +1,9 @@
-#include "main_menu_loop.h"
+#include "gameplay_loop.h"
 
 #include "globals.h"
 #include "scene_manager.h"
 #include "button.h"
+#include "frog.h"
 
 namespace frogger
 {
@@ -30,13 +31,17 @@ namespace frogger
 
 		void Init()
 		{
-			pauseButton = button::Init(defaultPos, defaultSize, "||");
+			frog::Init();
+
+			pauseButton = button::Init({ (global::screenWidth / 2.0f) - defaultSize.y / 2.0f ,0.0f}, { defaultSize.y,defaultSize.y }, "||");
 			defaultPos.y += defaultSize.y * 1.5f;
 			resumeButton = button::Init(defaultPos, defaultSize, "Resume");
 			defaultPos.y += defaultSize.y * 1.5f;
 			retryButton = button::Init(defaultPos, defaultSize, "Retry");
 			defaultPos.y += defaultSize.y * 1.5f;
 			menuButton = button::Init(defaultPos, defaultSize, "Menu");
+
+			Reset();
 		}
 
 		void Input()
@@ -73,8 +78,16 @@ namespace frogger
 			}
 		}
 
+		void Reset()
+		{
+			frog::Reset();
+			isPaused = false;
+		}
+
 		static void NormalInput()
 		{
+			frog::Input();
+
 			button::Update(pauseButton);
 		}
 
@@ -87,8 +100,11 @@ namespace frogger
 
 		static void NormalUpdate()
 		{
+			frog::Update();
+
 			if (pauseButton.clicked)
 			{
+				isPaused = true;
 			}
 		}
 
@@ -96,19 +112,22 @@ namespace frogger
 		{
 			if (resumeButton.clicked)
 			{
+				isPaused = false;
 			}
 			else if (retryButton.clicked)
 			{
+				Reset();
 			}
 			else if (menuButton.clicked)
 			{
+				scene::ChangeScene(scene::Scene::MAIN_MENU);
 			}
 		}
 
 		static void NormalDraw()
 		{
+			frog::Draw();
 			button::Draw(pauseButton);
-
 		}
 
 		static void PauseDraw()

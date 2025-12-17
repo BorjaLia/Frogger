@@ -20,6 +20,9 @@
     <Filter Include="src\Globals">
       <UniqueIdentifier>{c14dee6a-6476-4fd5-8903-e87518972d33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Game\Entity">
+      <UniqueIdentifier>{508db232-cf47-4c3f-9634-d002964ccec5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -55,6 +58,9 @@
     <ClCompile Include="src\gameplay_loop.cpp">
       <Filter>src\Game\GameLoops</Filter>
     </ClCompile>
+    <ClCompile Include="src\frog.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game_manager.h">
@@ -86,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="src\gameplay_loop.h">
       <Filter>src\Game\GameLoops</Filter>
+    </ClInclude>
+    <ClInclude Include="src\frog.h">
+      <Filter>src\Game\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
