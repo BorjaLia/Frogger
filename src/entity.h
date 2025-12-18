@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "math_blib.h"
+#include "texture_manager.h"
 
 namespace frogger
 {
@@ -40,12 +41,14 @@ namespace frogger
 
 			vec::Vector2 coll = { 0.0f,0.0f };
 
-			std::vector<sf::Sprite> anim = {};
-
+			bool isAnimated = false;
+			
 			float animStart = 0.0f;
 			float animCounter = 0.0f;
 
 			float animFrameIncrease = 30.0f;
+
+			sf::Sprite sprite{textures::temp};
 		};
 
 		extern std::vector<Entity> entities;

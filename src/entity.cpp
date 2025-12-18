@@ -1,6 +1,7 @@
 #include "entity.h"
 
 #include "globals.h"
+#include "texture_manager.h"
 #include "frog.h"
 
 namespace frogger
@@ -10,6 +11,7 @@ namespace frogger
 		static void Move();
 		static void BordersUpdate();
 		static void PathUpdate();
+		static void SpriteUpdate();
 	}
 
 	namespace object
@@ -57,6 +59,7 @@ namespace frogger
 				default:
 					break;
 				}
+				SpriteUpdate();
 			}
 		}
 
@@ -64,6 +67,12 @@ namespace frogger
 		{
 			for (currentEntity = 0; currentEntity < entities.size(); currentEntity++)
 			{
+
+				if (!entities[currentEntity].isAnimated)
+				{
+					entities[currentEntity].sprite.setOrigin(sf::Vector2f(entities[currentEntity].pos.x, entities[currentEntity].pos.y));
+					global::window.draw(entities[currentEntity].sprite);
+				}
 
 #ifdef _DEBUG
 				sf::Color color;
@@ -106,19 +115,24 @@ namespace frogger
 			waterT.pos = { global::screenWidth / 2.0f,(global::screenHeight / 4.0f) - 60.0f };
 			waterT.size = { global::screenWidth,40.0f };
 			waterT.coll = waterT.size;
+
+			waterT.sprite.setTexture(textures::entities::water, true);
+
 			entities.push_back(waterT);
 
 			Entity logT;
 			logT.type = Type::PLATFORM;
 			logT.pathType = PathType::OPEN_PATH;
 			logT.pos = { global::screenWidth / 2.0f,(global::screenHeight / 4.0f) - 60.0f };
-			logT.size = { 240.0f,40.0f };
+			logT.size = { 100.0f,100.0f };
 			logT.coll = logT.size;
 
 			logT.speed *= 6;
 
 			logT.path = { {(global::screenWidth + logT.size.x),((global::screenHeight / 4.0f) - 60.0f)},{-logT.size.x,(global::screenHeight / 4.0f) - 60.0f} };
 			logT.objective = 1;
+
+			logT.sprite.setTexture(textures::entities::log, true);
 
 			entities.push_back(logT);
 
@@ -128,19 +142,24 @@ namespace frogger
 			waterM.pos = { global::screenWidth / 2.0f,(global::screenHeight / 2.0f) - 60.0f };
 			waterM.size = { global::screenWidth,40.0f };
 			waterM.coll = waterM.size;
+
+			waterM.sprite.setTexture(textures::entities::water, true);
+
 			entities.push_back(waterM);
 
 			Entity logM;
 			logM.type = Type::PLATFORM;
 			logM.pathType = PathType::OPEN_PATH;
 			logM.pos = { global::screenWidth / 2.0f,(global::screenHeight / 2.0f) - 60.0f };
-			logM.size = { 240.0f,40.0f };
+			logM.size = { 100.0f,100.0f };
 			logM.coll = logM.size;
 
 			logM.speed *= 4;
 
 			logM.path = { {-logM.size.x,(global::screenHeight / 2.0f) - 60.0f},{(global::screenWidth + logM.size.x),(global::screenHeight / 2.0f) - 60.0f} };
 			logM.objective = 1;
+
+			logM.sprite.setTexture(textures::entities::log, true);
 
 			entities.push_back(logM);
 
@@ -150,19 +169,24 @@ namespace frogger
 			waterB.pos = { global::screenWidth / 2.0f,(global::screenHeight * 0.75f) - 60.0f };
 			waterB.size = { global::screenWidth,40.0f };
 			waterB.coll = waterB.size;
+
+			waterB.sprite.setTexture(textures::entities::water, true);
+
 			entities.push_back(waterB);
 
 			Entity logB;
 			logB.type = Type::PLATFORM;
 			logB.pathType = PathType::OPEN_PATH;
 			logB.pos = { global::screenWidth / 2.0f,(global::screenHeight * 0.75f) - 60.0f };
-			logB.size = { 240.0f,40.0f };
+			logB.size = { 100.0f,100.0f };
 			logB.coll = logB.size;
 
 			logB.speed *= 3;
 
 			logB.path = { {(global::screenWidth + logB.size.x),(global::screenHeight * 0.75f) - 60.0f},{-logB.size.x,(global::screenHeight * 0.75f) - 60.0f} };
 			logB.objective = 1;
+
+			logB.sprite.setTexture(textures::entities::log, true);
 
 			entities.push_back(logB);
 
@@ -174,6 +198,8 @@ namespace frogger
 			bee.coll = bee.size;
 
 			bee.speed *= 1.1f;
+
+			bee.sprite.setTexture(textures::entities::bee, true);
 
 			entities.push_back(bee);
 		}
@@ -244,6 +270,13 @@ namespace frogger
 			default:
 				break;
 			}
+		}
+
+		static void SpriteUpdate()
+		{
+			//entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x - entities[currentEntity].size.x / 2.0f, entities[currentEntity].pos.y - entities[currentEntity].size.y / 2.0f));
+			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x, entities[currentEntity].pos.y));
+			//entities[currentEntity].sprite.setScale(sf::Vector2f(entities[currentEntity].size.x / entities[currentEntity].sprite.getTexture().getSize().x, entities[currentEntity].size.y / entities[currentEntity].sprite.getTexture().getSize().y));
 		}
 	}
 }

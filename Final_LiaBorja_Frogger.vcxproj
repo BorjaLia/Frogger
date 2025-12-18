@@ -32,6 +32,7 @@
     <ClCompile Include="src\main_menu_loop.cpp" />
     <ClCompile Include="src\math_blib.cpp" />
     <ClCompile Include="src\scene_manager.cpp" />
+    <ClCompile Include="src\sound_manager.cpp" />
     <ClCompile Include="src\texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +48,7 @@
     <ClInclude Include="src\main_menu_loop.h" />
     <ClInclude Include="src\math_blib.h" />
     <ClInclude Include="src\scene_manager.h" />
+    <ClInclude Include="src\sound_manager.h" />
     <ClInclude Include="src\texture_manager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

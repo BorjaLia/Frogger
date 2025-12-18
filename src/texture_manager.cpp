@@ -6,9 +6,12 @@ namespace frogger
 {
 	namespace textures
 	{
+		sf::Texture temp = sf::Texture();
+
 		namespace entities
 		{
-			sf::Texture frog;
+			sf::Texture frogIdle;
+			sf::Texture frogJump;
 			sf::Texture water;
 			sf::Texture log;
 			sf::Texture bee;
@@ -21,7 +24,11 @@ namespace frogger
 
 		void Init()
 		{
-			if (!entities::frog.loadFromFile("res/img/sprite/frog.png"))
+			if (!entities::frogIdle.loadFromFile("res/img/sprite/frog_idle.png"))
+			{
+				std::cout << "ERROR - falied loading a texture!" << std::endl;
+			}
+			if (!entities::frogJump.loadFromFile("res/img/sprite/frog_jump.png"))
 			{
 				std::cout << "ERROR - falied loading a texture!" << std::endl;
 			}

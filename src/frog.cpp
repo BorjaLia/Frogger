@@ -11,6 +11,7 @@ namespace frogger
 		static void PrepareJump(vec::Vector2 dir, bool& preparingJump);
 		static void JumpUpdate();
 		static void BordersUpdate();
+		static void SpriteUpdate();
 	}
 
 	namespace frog
@@ -21,17 +22,17 @@ namespace frogger
 
 			const bool onPlatform = false;
 
-			const vec::Vector2 size = { 20.0f,20.0f };
+			const vec::Vector2 size = { 75.0f,75.0f };
 
 			const vec::Vector2 pos = { (global::screenWidth / 2.0f),(global::screenHeight * 0.75f) };
 			const vec::Vector2 dir = { 0.0f,0.0f };
 
-			const float jumpForceMultiplier = 4000.0f;
+			const float jumpForceMultiplier = 1500.0f;
 			const float jumpForce = 0.0f;
-			const float maxJumpForce = 2000.0f;
-			const float deceleraton = 8000.0f;
+			const float maxJumpForce = 1200.0f;
+			const float deceleraton = 6000.0f;
 
-			const vec::Vector2 coll = { 18.0f,18.0f };
+			const vec::Vector2 coll = { size.x * 0.8f,size.y * 0.8f };
 
 			const float animStart = 0.0f;
 			const float animCounter = 0.0f;
@@ -49,6 +50,9 @@ namespace frogger
 
 		void Init()
 		{
+			player.idleSprite.setTexture(textures::entities::frogIdle, true);
+			player.jumpSprite.setTexture(textures::entities::frogJump, true);
+
 			player.upKey = { sf::Keyboard::Key::W, sf::Keyboard::Key::Up };
 			player.leftKey = { sf::Keyboard::Key::A, sf::Keyboard::Key::Left };
 			player.dowKey = { sf::Keyboard::Key::S, sf::Keyboard::Key::Down };
@@ -122,11 +126,13 @@ namespace frogger
 			{
 				JumpUpdate();
 				BordersUpdate();
+				SpriteUpdate();
 			}
 		}
 
 		void Draw()
 		{
+
 #ifdef _DEBUG
 			sf::RectangleShape sizeShape({ player.size.x,player.size.y });
 			sizeShape.setPosition(sf::Vector2f(player.pos.x - (player.size.x / 2.0f), player.pos.y - (player.size.y / 2.0f)));
@@ -152,6 +158,15 @@ namespace frogger
 			center.setFillColor(sf::Color::Magenta);
 			global::window.draw(center);
 #endif // _DEBUG
+
+			if (!player.isJumping)
+			{
+				global::window.draw(player.idleSprite);
+			}
+			else
+			{
+				global::window.draw(player.jumpSprite);
+			}
 		}
 
 		void Reset()
@@ -233,7 +248,7 @@ namespace frogger
 		{
 			float speedMultiplier = 0.4f;
 
-			if (player.pos.x < player.size.x/2.0f)
+			if (player.pos.x < player.size.x / 2.0f)
 			{
 				player.pos.x = player.size.x / 2.0f;
 				if (player.dir.x < 0.0f)
@@ -244,7 +259,7 @@ namespace frogger
 
 			if (player.pos.x + (player.size.x / 2.0f) > global::screenWidth)
 			{
-				player.pos.x = player.pos.x + (player.size.x / 2.0f);
+				player.pos.x = global::screenWidth - (player.size.x);
 				if (player.dir.x > 0.0f)
 				{
 					player.dir.x *= -speedMultiplier;
@@ -262,12 +277,21 @@ namespace frogger
 
 			if (player.pos.y + (player.size.y / 2.0f) > global::screenHeight)
 			{
-				player.pos.y = player.pos.y + (player.size.y / 2.0f);
+				player.pos.y = global::screenWidth - (player.size.y);
+
 				if (player.dir.y > 0.0f)
 				{
 					player.dir.y *= -speedMultiplier;
 				}
 			}
+		}
+		static void SpriteUpdate()
+		{
+			player.idleSprite.setPosition(sf::Vector2f(player.pos.x - player.size.x / 2.0f, player.pos.y - player.size.y / 2.0f));
+			player.idleSprite.setScale(sf::Vector2f(player.size.x / textures::entities::frogIdle.getSize().x, player.size.y / textures::entities::frogIdle.getSize().y));
+			
+			player.jumpSprite.setPosition(player.idleSprite.getPosition());
+			player.jumpSprite.setScale(player.idleSprite.getScale());
 		}
 	}
 }

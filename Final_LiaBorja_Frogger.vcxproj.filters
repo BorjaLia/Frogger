@@ -67,6 +67,9 @@
     <ClCompile Include="src\texture_manager.cpp">
       <Filter>src\Globals</Filter>
     </ClCompile>
+    <ClCompile Include="src\sound_manager.cpp">
+      <Filter>src\Globals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game_manager.h">
@@ -106,6 +109,9 @@
       <Filter>src\Game\Entity</Filter>
     </ClInclude>
     <ClInclude Include="src\texture_manager.h">
+      <Filter>src\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sound_manager.h">
       <Filter>src\Globals</Filter>
     </ClInclude>
   </ItemGroup>

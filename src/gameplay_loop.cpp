@@ -30,6 +30,8 @@ namespace frogger
 		static const vec::Vector2 defaultSize = { 200.0f,100.0f };
 		static vec::Vector2 defaultPos = { (global::screenWidth / 2.0f) - defaultSize.x / 2.0f, (global::screenHeight / 2.0f) - defaultSize.y / 2.0f };
 
+		static sf::Sprite gameplayBackground{ textures::temp };
+
 		static button::Button pauseButton;
 		static button::Button resumeButton;
 		static button::Button retryButton;
@@ -42,6 +44,8 @@ namespace frogger
 		void Init()
 		{
 			textures::Init();
+
+			gameplayBackground.setTexture(textures::backgrounds::gameplayBackground, true);
 
 			frog::Init();
 			object::Init();
@@ -184,7 +188,7 @@ namespace frogger
 			if (isOnPlatform && !frog::player.onPlatform)
 			{
 				frog::player.onPlatform = true;
-				frog::player.dir = frog::player.dir.normalized() * frog::player.size.magnitude() * 20.0f;
+				frog::player.dir = frog::player.dir.normalized() * 400.0f;
 			}
 		}
 
@@ -206,6 +210,8 @@ namespace frogger
 
 		static void NormalDraw()
 		{
+			global::window.draw(gameplayBackground);
+
 			object::Draw();
 			frog::Draw();
 			button::Draw(pauseButton);

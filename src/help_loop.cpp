@@ -37,7 +37,6 @@ namespace frogger
 			instructionsLabel = label::Init({ defaultPos.x,global::screenHeight / 2.0f }, "Gameplay", 30, sf::Color::Black);
 			instructionsLabel2 = label::Init({ defaultPos.x,global::screenHeight / 1.8f }, "Get to the end!", 20, sf::Color::Black);
 			instructionsLabel3 = label::Init({ defaultPos.x/1.5f,global::screenHeight / 1.7f }, "avoid the water and bees", 20, sf::Color::Black);
-
 		}
 
 		void Input()

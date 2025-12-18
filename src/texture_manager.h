@@ -6,9 +6,12 @@ namespace frogger
 {
 	namespace textures
 	{
+		extern sf::Texture temp;
+
 		namespace entities
 		{
-			extern sf::Texture frog;
+			extern sf::Texture frogIdle;
+			extern sf::Texture frogJump;
 			extern sf::Texture water;
 			extern sf::Texture log;
 			extern sf::Texture bee;

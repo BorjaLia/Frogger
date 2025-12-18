@@ -11,9 +11,9 @@ namespace frogger
 
 	namespace button
 	{
-		static sf::Color normalColor = sf::Color(235, 235, 235);
-		static sf::Color hoverColor = sf::Color(200, 200, 200);
-		static sf::Color pressedColor = sf::Color(164, 164, 164);
+		static sf::Color normalColor = sf::Color(235, 235, 235,164);
+		static sf::Color hoverColor = sf::Color(200, 200, 200,164);
+		static sf::Color pressedColor = sf::Color(164, 164, 164,164);
 
 		Button Init(vec::Vector2 pos, vec::Vector2 size, std::string text)
 		{
