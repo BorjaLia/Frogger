@@ -274,9 +274,8 @@ namespace frogger
 
 		static void SpriteUpdate()
 		{
-			//entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x - entities[currentEntity].size.x / 2.0f, entities[currentEntity].pos.y - entities[currentEntity].size.y / 2.0f));
-			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x, entities[currentEntity].pos.y));
-			//entities[currentEntity].sprite.setScale(sf::Vector2f(entities[currentEntity].size.x / entities[currentEntity].sprite.getTexture().getSize().x, entities[currentEntity].size.y / entities[currentEntity].sprite.getTexture().getSize().y));
+			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x - entities[currentEntity].size.x / 2.0f, entities[currentEntity].pos.y - entities[currentEntity].size.y / 2.0f));
+			entities[currentEntity].sprite.setScale(sf::Vector2f(entities[currentEntity].size.x / entities[currentEntity].sprite.getTexture().getSize().x, entities[currentEntity].size.y / entities[currentEntity].sprite.getTexture().getSize().y));
 		}
 	}
 }

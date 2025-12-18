@@ -259,7 +259,7 @@ namespace frogger
 
 			if (player.pos.x + (player.size.x / 2.0f) > global::screenWidth)
 			{
-				player.pos.x = global::screenWidth - (player.size.x);
+				player.pos.x = global::screenWidth - (player.size.x / 2.0f);
 				if (player.dir.x > 0.0f)
 				{
 					player.dir.x *= -speedMultiplier;
@@ -277,7 +277,7 @@ namespace frogger
 
 			if (player.pos.y + (player.size.y / 2.0f) > global::screenHeight)
 			{
-				player.pos.y = global::screenWidth - (player.size.y);
+				player.pos.y = global::screenWidth - (player.size.y / 2.0f);
 
 				if (player.dir.y > 0.0f)
 				{
