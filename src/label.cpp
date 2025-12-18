@@ -1,28 +1,29 @@
 #include "label.h"
+
+#include "globals.h"
+
 namespace frogger
 {
 	namespace label
 	{
-		Label Init(vec::Vector2 pos, std::string text, sf::Font& font, int fontSize, sf::Color color)
+		Label Init(vec::Vector2 pos, std::string text, int fontSize, sf::Color color)
 		{
 			Label label;
 
 			label.pos = pos;
 			label.text = text;
-			label.font = font;
 			label.fontSize = fontSize;
 			label.color = sf::Color(static_cast<uint8_t>(color.r), static_cast<uint8_t>(color.g), static_cast<uint8_t>(color.b), static_cast<uint8_t>(color.a));
 
 			return label;
 		}
 
-		Label Init(vec::Vector2 pos, char text, sf::Font& font, int fontSize, sf::Color color)
+		Label Init(vec::Vector2 pos, char text, int fontSize, sf::Color color)
 		{
 			Label label;
 
 			label.pos = pos;
 			label.text = text;
-			label.font = font;
 			label.fontSize = fontSize;
 			label.color = sf::Color(static_cast<uint8_t>(color.r), static_cast<uint8_t>(color.g), static_cast<uint8_t>(color.b), static_cast<uint8_t>(color.a));
 
@@ -31,7 +32,7 @@ namespace frogger
 
 		void Draw(Label& label, sf::RenderWindow& window)
 		{
-			sf::Text text = sf::Text(label.font);
+			sf::Text text = sf::Text(global::font);
 
 			text.setString(label.text.c_str());
 
