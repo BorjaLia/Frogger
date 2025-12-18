@@ -33,4 +33,6 @@ Credits
 Programmer: Lia Deichler Borja
 
 Art:
+Facundo Arrastua
+Celeste Bassi
 
