@@ -279,8 +279,17 @@ namespace frogger
 
 		static void SpriteUpdate()
 		{
-			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x - (entities[currentEntity].size.x / 2.0f), entities[currentEntity].pos.y - (entities[currentEntity].size.y / 2.0f)));
+			float angleRad = std::atan2(entities[currentEntity].dir.y, entities[currentEntity].dir.x);
+
+			if (entities[currentEntity].dir.x != 0.0f || entities[currentEntity].dir.y != 0.0f)
+			{
+				entities[currentEntity].sprite.setRotation(sf::radians(angleRad) + sf::degrees(90.f));
+			}
+
+			entities[currentEntity].sprite.setOrigin(sf::Vector2f(static_cast<float>(entities[currentEntity].sprite.getTexture().getSize().x) / 2.0f, static_cast<float>(entities[currentEntity].sprite.getTexture().getSize().y) / 2.0f));
+
 			entities[currentEntity].sprite.setScale(sf::Vector2f(entities[currentEntity].size.x / entities[currentEntity].sprite.getTexture().getSize().x, entities[currentEntity].size.y / entities[currentEntity].sprite.getTexture().getSize().y));
+			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x, entities[currentEntity].pos.y));
 		}
 	}
 }

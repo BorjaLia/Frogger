@@ -287,9 +287,23 @@ namespace frogger
 		}
 		static void SpriteUpdate()
 		{
-			player.idleSprite.setPosition(sf::Vector2f(player.pos.x - player.size.x / 2.0f, player.pos.y - player.size.y / 2.0f));
-			player.idleSprite.setScale(sf::Vector2f(player.size.x / textures::entities::frogIdle.getSize().x, player.size.y / textures::entities::frogIdle.getSize().y));
+
+			float angleRad = std::atan2(player.dir.y, player.dir.x);
+
+			if (player.dir.x != 0.0f || player.dir.y != 0.0f)
+			{
+				player.idleSprite.setRotation(sf::radians(angleRad) + sf::degrees(90.f));
+			}
+
+			player.idleSprite.setOrigin(sf::Vector2f(static_cast<float>(player.idleSprite.getTexture().getSize().x) / 2.0f, static_cast<float>(player.idleSprite.getTexture().getSize().y) / 2.0f));
+
+			player.idleSprite.setScale(sf::Vector2f(player.size.x / player.idleSprite.getTexture().getSize().x, player.size.y / player.idleSprite.getTexture().getSize().y));
+			player.idleSprite.setPosition(sf::Vector2f(player.pos.x, player.pos.y));
 			
+			player.jumpSprite.setRotation(player.idleSprite.getRotation());
+
+			player.jumpSprite.setOrigin(player.idleSprite.getOrigin());
+
 			player.jumpSprite.setPosition(player.idleSprite.getPosition());
 			player.jumpSprite.setScale(player.idleSprite.getScale());
 		}
