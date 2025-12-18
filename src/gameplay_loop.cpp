@@ -43,14 +43,12 @@ namespace frogger
 
 		void Init()
 		{
-			textures::Init();
-
 			gameplayBackground.setTexture(textures::backgrounds::gameplayBackground, true);
 
 			frog::Init();
 			object::Init();
 
-			pauseButton = button::Init({ (global::screenWidth / 2.0f) - defaultSize.y / 2.0f ,0.0f }, { defaultSize.y,defaultSize.y }, "||");
+			pauseButton = button::Init({ (global::screenWidth / 2.0f) - defaultSize.y / 3.0f ,0.0f }, { defaultSize.y / 2.0f,defaultSize.y / 2.0f }, "||");
 			defaultPos.y += defaultSize.y * 1.5f;
 			resumeButton = button::Init(defaultPos, defaultSize, "Resume");
 			defaultPos.y += defaultSize.y * 1.5f;
@@ -148,7 +146,6 @@ namespace frogger
 
 			bool hasBeenHit = false;
 			bool isOnPlatform = false;
-			//frog::player.onPlatform = false;
 
 			for (int d = 0; d < object::entities.size(); d++)
 			{
@@ -188,7 +185,7 @@ namespace frogger
 			if (isOnPlatform && !frog::player.onPlatform)
 			{
 				frog::player.onPlatform = true;
-				frog::player.dir = frog::player.dir.normalized() * 400.0f;
+				frog::player.dir = frog::player.dir.normalized() * 600.0f;
 			}
 		}
 

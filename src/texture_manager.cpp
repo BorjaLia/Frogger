@@ -49,7 +49,7 @@ namespace frogger
 			{
 				std::cout << "ERROR - falied loading a texture!" << std::endl;
 			}
-			if (!backgrounds::menuBackground.loadFromFile("res/img/background/menu_background.png"))
+			if (!backgrounds::menuBackground.loadFromFile("res/img/background/gameplay_background.png"))
 			{
 				std::cout << "ERROR - falied loading a texture!" << std::endl;
 			}

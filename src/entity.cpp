@@ -68,32 +68,29 @@ namespace frogger
 			for (currentEntity = 0; currentEntity < entities.size(); currentEntity++)
 			{
 
-				if (!entities[currentEntity].isAnimated)
-				{
-					entities[currentEntity].sprite.setOrigin(sf::Vector2f(entities[currentEntity].pos.x, entities[currentEntity].pos.y));
-					global::window.draw(entities[currentEntity].sprite);
-				}
-
 #ifdef _DEBUG
-				sf::Color color;
+				sf::Color colorSize;
+				sf::Color colorColl;
 
 				if (entities[currentEntity].type == Type::DANGER)
 				{
-					color = sf::Color::Red;
+					colorSize = sf::Color::Red;
+					colorColl = sf::Color::Cyan;
 				}
 				else
 				{
-					color = sf::Color::Yellow;
+					colorSize = sf::Color::Yellow;
+					colorColl = sf::Color::Cyan;
 				}
 
 				sf::RectangleShape sizeShape({ entities[currentEntity].size.x,entities[currentEntity].size.y });
 				sizeShape.setPosition(sf::Vector2f(entities[currentEntity].pos.x - (entities[currentEntity].size.x / 2.0f), entities[currentEntity].pos.y - (entities[currentEntity].size.y / 2.0f)));
-				sizeShape.setFillColor(color);
+				sizeShape.setFillColor(colorSize);
 				global::window.draw(sizeShape);
 
 				sf::RectangleShape collShape({ entities[currentEntity].coll.x,entities[currentEntity].coll.y });
 				collShape.setPosition(sf::Vector2f(entities[currentEntity].pos.x - (entities[currentEntity].coll.x / 2.0f), entities[currentEntity].pos.y - (entities[currentEntity].coll.y / 2.0f)));
-				collShape.setFillColor(color);
+				collShape.setFillColor(colorColl);
 				global::window.draw(collShape);
 
 				float radius = 5.0f;
@@ -102,19 +99,27 @@ namespace frogger
 				center.setFillColor(sf::Color::Magenta);
 				global::window.draw(center);
 #endif // _DEBUG
+
+				if (!entities[currentEntity].isAnimated)
+				{
+					global::window.draw(entities[currentEntity].sprite);
+				}
 			}
 		}
 
 		void Reset()
 		{
+			const vec::Vector2 waterSize = { global::screenWidth,120.0f };
+			const vec::Vector2 waterColl = { global::screenWidth,80.0f };
+
 			entities.clear();
 
 			Entity waterT;
 			waterT.type = Type::DANGER;
 			waterT.pathType = PathType::STATIC;
 			waterT.pos = { global::screenWidth / 2.0f,(global::screenHeight / 4.0f) - 60.0f };
-			waterT.size = { global::screenWidth,40.0f };
-			waterT.coll = waterT.size;
+			waterT.size = waterSize;
+			waterT.coll = waterColl;
 
 			waterT.sprite.setTexture(textures::entities::water, true);
 
@@ -140,8 +145,8 @@ namespace frogger
 			waterM.type = Type::DANGER;
 			waterM.pathType = PathType::STATIC;
 			waterM.pos = { global::screenWidth / 2.0f,(global::screenHeight / 2.0f) - 60.0f };
-			waterM.size = { global::screenWidth,40.0f };
-			waterM.coll = waterM.size;
+			waterM.size = waterSize;
+			waterM.coll = waterColl;
 
 			waterM.sprite.setTexture(textures::entities::water, true);
 
@@ -167,8 +172,8 @@ namespace frogger
 			waterB.type = Type::DANGER;
 			waterB.pathType = PathType::STATIC;
 			waterB.pos = { global::screenWidth / 2.0f,(global::screenHeight * 0.75f) - 60.0f };
-			waterB.size = { global::screenWidth,40.0f };
-			waterB.coll = waterB.size;
+			waterB.size = waterSize;
+			waterB.coll = waterColl;
 
 			waterB.sprite.setTexture(textures::entities::water, true);
 
@@ -197,7 +202,7 @@ namespace frogger
 			bee.size = { 30.0f,30.0f };
 			bee.coll = bee.size;
 
-			bee.speed *= 1.1f;
+			bee.speed *= 0.95f;
 
 			bee.sprite.setTexture(textures::entities::bee, true);
 
@@ -274,7 +279,7 @@ namespace frogger
 
 		static void SpriteUpdate()
 		{
-			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x - entities[currentEntity].size.x / 2.0f, entities[currentEntity].pos.y - entities[currentEntity].size.y / 2.0f));
+			entities[currentEntity].sprite.setPosition(sf::Vector2f(entities[currentEntity].pos.x - (entities[currentEntity].size.x / 2.0f), entities[currentEntity].pos.y - (entities[currentEntity].size.y / 2.0f)));
 			entities[currentEntity].sprite.setScale(sf::Vector2f(entities[currentEntity].size.x / entities[currentEntity].sprite.getTexture().getSize().x, entities[currentEntity].size.y / entities[currentEntity].sprite.getTexture().getSize().y));
 		}
 	}

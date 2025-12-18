@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "globals.h"
+#include "label.h"
 #include "scene_manager.h"
 #include "main_menu_loop.h"
 #include "credit_loop.h"
@@ -11,8 +12,13 @@
 
 #include <iostream>
 
+#include "texture_manager.h"
+
 namespace frogger
 {
+	static sf::Sprite menuBackground{ textures::temp };
+	static label::Label mainTitleLabel;
+
 	static void MainLoop();
 
 	static void Init();
@@ -54,6 +60,11 @@ namespace frogger
 
 	static void Init()
 	{
+		textures::Init();
+
+		menuBackground.setTexture(textures::backgrounds::menuBackground, true);
+		mainTitleLabel = label::Init({global::screenWidth/8.0f,global::screenWidth / 4.0f},"Frogger!",80,sf::Color::Black);
+
 		main_menu::Init();
 		credits::Init();
 		help::Init();
@@ -131,6 +142,10 @@ namespace frogger
 	static void Draw()
 	{
 		global::window.clear(sf::Color(255, 255, 255));
+
+		global::window.draw(menuBackground);
+		label::Draw(mainTitleLabel,global::window);
+
 		switch (scene::currentScene)
 		{
 		case scene::Scene::MAIN_MENU:

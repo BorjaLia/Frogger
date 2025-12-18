@@ -24,12 +24,12 @@ namespace frogger
 
 			const vec::Vector2 size = { 75.0f,75.0f };
 
-			const vec::Vector2 pos = { (global::screenWidth / 2.0f),(global::screenHeight * 0.75f) };
+			const vec::Vector2 pos = { (global::screenWidth / 2.0f),(global::screenHeight * 0.85f) };
 			const vec::Vector2 dir = { 0.0f,0.0f };
 
 			const float jumpForceMultiplier = 1500.0f;
 			const float jumpForce = 0.0f;
-			const float maxJumpForce = 1200.0f;
+			const float maxJumpForce = 1400.0f;
 			const float deceleraton = 6000.0f;
 
 			const vec::Vector2 coll = { size.x * 0.8f,size.y * 0.8f };
