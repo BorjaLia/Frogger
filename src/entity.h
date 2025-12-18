@@ -31,7 +31,10 @@ namespace frogger
 			vec::Vector2 pos = { 0.0f,0.0f };
 			vec::Vector2 dir = { 0.0f,0.0f };
 
+			float speed = 50.0f;
+
 			std::vector<vec::Vector2> path = {};
+			int objective = 0;
 
 			vec::Vector2 size = { 0.0f,0.0f };
 
