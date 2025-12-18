@@ -13,14 +13,18 @@ namespace frogger
 		static vec::Vector2 defaultPos = { (global::screenWidth / 2.0f) - defaultSize.x / 2.0f, (global::screenHeight / 2.0f) - defaultSize.y / 2.0f };
 
 		static button::Button returnButton;
+		static label::Label titleLabel;
 		static label::Label creditsLabel;
+		static label::Label programmerLabel;
 
 		void Init()
 		{
 			defaultPos.y += 3.0f * (defaultSize.y * 1.5f);
 			returnButton = button::Init(defaultPos, defaultSize, "Return");
 
-			creditsLabel = label::Init();
+			titleLabel = label::Init({defaultPos.x,global::screenHeight/15.0f},"Credits",25,sf::Color::Black);
+			creditsLabel = label::Init({defaultPos.x,global::screenHeight/5.0f},"Made by",15,sf::Color::Black);
+			programmerLabel = label::Init({defaultPos.x,global::screenHeight/4.0f},"Borja Lia",30,sf::Color::Black);
 		}
 
 		void Input()
@@ -37,6 +41,9 @@ namespace frogger
 		void Draw()
 		{
 			button::Draw(returnButton);
+			label::Draw(creditsLabel,global::window);
+			label::Draw(programmerLabel,global::window);
+			label::Draw(titleLabel,global::window);
 		}
 	}
 }

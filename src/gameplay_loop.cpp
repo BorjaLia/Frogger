@@ -127,7 +127,7 @@ namespace frogger
 			frog::Update();
 			object::Update();
 
-			if (pauseButton.clicked)
+			if (pauseButton.clicked || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 			{
 				isPaused = true;
 				resumeButton.clicked = false;
