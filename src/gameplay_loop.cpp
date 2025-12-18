@@ -1,6 +1,7 @@
 #include "gameplay_loop.h"
 
 #include "globals.h"
+#include "texture_manager.h"
 #include "scene_manager.h"
 #include "button.h"
 #include "frog.h"
@@ -11,6 +12,7 @@ namespace frogger
 	namespace gameplay
 	{
 		static bool isPaused = false;
+		static bool hasWon = false;
 
 		static void NormalInput();
 		static void PauseInput();
@@ -34,6 +36,8 @@ namespace frogger
 
 		void Init()
 		{
+			textures::Init();
+
 			frog::Init();
 			object::Init();
 
@@ -87,6 +91,7 @@ namespace frogger
 			frog::Reset();
 			object::Reset();
 			isPaused = false;
+			hasWon = false;
 		}
 
 		static void NormalInput()
@@ -98,7 +103,7 @@ namespace frogger
 
 		static void PauseInput()
 		{
-			if (frog::player.isAlive)
+			if (frog::player.isAlive && !hasWon)
 			{
 				button::Update(resumeButton);
 			}
@@ -108,10 +113,15 @@ namespace frogger
 
 		static void NormalUpdate()
 		{
-			if (!frog::player.isAlive)
+			if (!frog::player.isAlive || hasWon)
 			{
 				isPaused = true;
 				resumeButton.clicked = false;
+			}
+
+			if (frog::player.pos.y <= 100.0f)
+			{
+				hasWon = true;
 			}
 
 			frog::Update();
@@ -123,6 +133,10 @@ namespace frogger
 				resumeButton.clicked = false;
 			}
 
+			bool hasBeenHit = false;
+			bool isOnPlatform = false;
+			//frog::player.onPlatform = false;
+
 			for (int d = 0; d < object::entities.size(); d++)
 			{
 				object::Entity& currentEntity = object::entities[d];
@@ -132,18 +146,36 @@ namespace frogger
 					{
 					case object::Type::DANGER:
 					{
-						frog::TakeHit();
+						hasBeenHit = true;
+						
 						break;
 					}
 					case object::Type::PLATFORM:
 					{
-						frog::Move(currentEntity.dir);
+						isOnPlatform = true;
+						frog::Move(currentEntity.dir * currentEntity.speed);
 						break;
 					}
 					default:
 						break;
 					}
 				}
+			}
+
+			if (!hasBeenHit && !isOnPlatform)
+			{
+				frog::player.onPlatform = false;
+			}
+
+			if (hasBeenHit && !isOnPlatform)
+			{
+				frog::TakeHit();
+			}
+
+			if (isOnPlatform && !frog::player.onPlatform)
+			{
+				frog::player.onPlatform = true;
+				frog::player.dir = frog::player.dir.normalized() * frog::player.size.magnitude() * 20.0f;
 			}
 		}
 
@@ -178,12 +210,21 @@ namespace frogger
 			shade.setFillColor(sf::Color(128,128,128,128));
 			global::window.draw(shade);
 
-			if (frog::player.isAlive)
+			if (frog::player.isAlive && !hasWon)
 			{
 				button::Draw(resumeButton);
 			}
 			button::Draw(retryButton);
 			button::Draw(menuButton);
+
+			if (hasWon)
+			{
+
+			}
+			else
+			{
+
+			}
 		}
 
 		static bool CheckCollision(vec::Vector2 pos1, vec::Vector2 size1, vec::Vector2 pos2, vec::Vector2 size2)

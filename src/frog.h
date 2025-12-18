@@ -13,6 +13,8 @@ namespace frogger
 		{
 			bool isAlive = true;
 
+			bool onPlatform = false;
+
 			vec::Vector2 pos = {0.0f,0.0f};
 			vec::Vector2 dir = {0.0f,0.0f};
 

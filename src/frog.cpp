@@ -19,6 +19,8 @@ namespace frogger
 		{
 			const bool isAlive = true;
 
+			const bool onPlatform = false;
+
 			const vec::Vector2 size = { 20.0f,20.0f };
 
 			const vec::Vector2 pos = { (global::screenWidth / 2.0f),(global::screenHeight * 0.75f) };
@@ -156,6 +158,8 @@ namespace frogger
 		{
 			player.isAlive = defaults::isAlive;
 
+			player.onPlatform = defaults::onPlatform;
+
 			player.pos = defaults::pos;
 			player.dir = defaults::dir;
 
@@ -229,28 +233,40 @@ namespace frogger
 		{
 			float speedMultiplier = 0.4f;
 
-			if (player.pos.x < 0.0f && player.dir.x < 0.0f)
+			if (player.pos.x < player.size.x/2.0f)
 			{
-				player.dir.x *= -speedMultiplier;
-				player.pos.x = 0.0f;
+				player.pos.x = player.size.x / 2.0f;
+				if (player.dir.x < 0.0f)
+				{
+					player.dir.x *= -speedMultiplier;
+				}
 			}
 
-			if (player.pos.x + (player.size.x / 2.0f) > global::screenWidth && player.dir.x > 0.0f)
+			if (player.pos.x + (player.size.x / 2.0f) > global::screenWidth)
 			{
-				player.dir.x *= -speedMultiplier;
 				player.pos.x = player.pos.x + (player.size.x / 2.0f);
+				if (player.dir.x > 0.0f)
+				{
+					player.dir.x *= -speedMultiplier;
+				}
 			}
 
-			if (player.pos.y < 0.0f && player.dir.y < 0.0f)
+			if (player.pos.y < player.size.y / 2.0f)
 			{
-				player.dir.y *= -speedMultiplier;
-				player.pos.y = 0.0f;
+				player.pos.y = player.size.y / 2.0f;
+				if (player.dir.y < 0.0f)
+				{
+					player.dir.y *= -speedMultiplier;
+				}
 			}
 
-			if (player.pos.y + (player.size.y / 2.0f) > global::screenHeight && player.dir.y > 0.0f)
+			if (player.pos.y + (player.size.y / 2.0f) > global::screenHeight)
 			{
-				player.dir.y *= -speedMultiplier;
 				player.pos.y = player.pos.y + (player.size.y / 2.0f);
+				if (player.dir.y > 0.0f)
+				{
+					player.dir.y *= -speedMultiplier;
+				}
 			}
 		}
 	}

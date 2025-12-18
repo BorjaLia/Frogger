@@ -1,6 +1,7 @@
 #include "entity.h"
 
 #include "globals.h"
+#include "frog.h"
 
 namespace frogger
 {
@@ -99,29 +100,87 @@ namespace frogger
 		{
 			entities.clear();
 
-			Entity water;
-			water.type = Type::DANGER;
-			water.pathType = PathType::STATIC;
-			water.pos = { global::screenWidth / 2.0f,global::screenHeight / 3.0f };
-			water.size = { global::screenWidth,60.0f };
-			water.coll = water.size;
-			entities.push_back(water);
+			Entity waterT;
+			waterT.type = Type::DANGER;
+			waterT.pathType = PathType::STATIC;
+			waterT.pos = { global::screenWidth / 2.0f,(global::screenHeight / 4.0f) - 60.0f };
+			waterT.size = { global::screenWidth,40.0f };
+			waterT.coll = waterT.size;
+			entities.push_back(waterT);
 
-			Entity log;
-			log.type = Type::PLATFORM;
-			log.pathType = PathType::OPEN_PATH;
-			log.pos = { global::screenWidth / 2.0f,global::screenHeight / 3.0f };
-			log.size = { 240.0f,60.0f };
-			log.coll = log.size;
+			Entity logT;
+			logT.type = Type::PLATFORM;
+			logT.pathType = PathType::OPEN_PATH;
+			logT.pos = { global::screenWidth / 2.0f,(global::screenHeight / 4.0f) - 60.0f };
+			logT.size = { 240.0f,40.0f };
+			logT.coll = logT.size;
 
-			log.path = { {global::screenWidth,global::screenHeight / 3.0f},{0.0f,global::screenHeight / 3.0f} };
+			logT.speed *= 6;
 
-			entities.push_back(log);
+			logT.path = { {(global::screenWidth + logT.size.x),((global::screenHeight / 4.0f) - 60.0f)},{-logT.size.x,(global::screenHeight / 4.0f) - 60.0f} };
+			logT.objective = 1;
+
+			entities.push_back(logT);
+
+			Entity waterM;
+			waterM.type = Type::DANGER;
+			waterM.pathType = PathType::STATIC;
+			waterM.pos = { global::screenWidth / 2.0f,(global::screenHeight / 2.0f) - 60.0f };
+			waterM.size = { global::screenWidth,40.0f };
+			waterM.coll = waterM.size;
+			entities.push_back(waterM);
+
+			Entity logM;
+			logM.type = Type::PLATFORM;
+			logM.pathType = PathType::OPEN_PATH;
+			logM.pos = { global::screenWidth / 2.0f,(global::screenHeight / 2.0f) - 60.0f };
+			logM.size = { 240.0f,40.0f };
+			logM.coll = logM.size;
+
+			logM.speed *= 4;
+
+			logM.path = { {-logM.size.x,(global::screenHeight / 2.0f) - 60.0f},{(global::screenWidth + logM.size.x),(global::screenHeight / 2.0f) - 60.0f} };
+			logM.objective = 1;
+
+			entities.push_back(logM);
+
+			Entity waterB;
+			waterB.type = Type::DANGER;
+			waterB.pathType = PathType::STATIC;
+			waterB.pos = { global::screenWidth / 2.0f,(global::screenHeight * 0.75f) - 60.0f };
+			waterB.size = { global::screenWidth,40.0f };
+			waterB.coll = waterB.size;
+			entities.push_back(waterB);
+
+			Entity logB;
+			logB.type = Type::PLATFORM;
+			logB.pathType = PathType::OPEN_PATH;
+			logB.pos = { global::screenWidth / 2.0f,(global::screenHeight * 0.75f) - 60.0f };
+			logB.size = { 240.0f,40.0f };
+			logB.coll = logB.size;
+
+			logB.speed *= 3;
+
+			logB.path = { {(global::screenWidth + logB.size.x),(global::screenHeight * 0.75f) - 60.0f},{-logB.size.x,(global::screenHeight * 0.75f) - 60.0f} };
+			logB.objective = 1;
+
+			entities.push_back(logB);
+
+			Entity bee;
+			bee.type = Type::DANGER;
+			bee.pathType = PathType::FOLLOW;
+			bee.pos = { global::screenWidth / 2.0f,(global::screenHeight) + bee.size.y };
+			bee.size = { 30.0f,30.0f };
+			bee.coll = bee.size;
+
+			bee.speed *= 1.1f;
+
+			entities.push_back(bee);
 		}
 
 		static void Move()
 		{
-			entities[currentEntity].pos += entities[currentEntity].dir;
+			entities[currentEntity].pos += entities[currentEntity].dir * entities[currentEntity].speed * global::deltaTime;
 		}
 
 		static void BordersUpdate()
@@ -155,6 +214,36 @@ namespace frogger
 
 		static void PathUpdate()
 		{
+			switch (entities[currentEntity].pathType)
+			{
+			case frogger::object::STATIC:
+			{
+				break;
+			}
+			case frogger::object::OPEN_PATH:
+			{
+				entities[currentEntity].dir = (entities[currentEntity].path[entities[currentEntity].objective] - entities[currentEntity].pos).normalized();
+
+				if ((entities[currentEntity].pos - entities[currentEntity].path[entities[currentEntity].objective]).magnitude() <= entities[currentEntity].speed * global::deltaTime)
+				{
+					entities[currentEntity].objective = 0;
+					entities[currentEntity].pos = entities[currentEntity].path[entities[currentEntity].objective];
+					entities[currentEntity].objective++;
+				}
+				break;
+			}
+			case frogger::object::CLOSED_PATH:
+			{
+				break;
+			}
+			case frogger::object::FOLLOW:
+			{
+				entities[currentEntity].dir = (frog::player.pos - entities[currentEntity].pos).normalized();
+				break;
+			}
+			default:
+				break;
+			}
 		}
 	}
 }
