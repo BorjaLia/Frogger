@@ -4,6 +4,7 @@
 #include "texture_manager.h"
 #include "scene_manager.h"
 #include "button.h"
+#include "label.h"
 #include "frog.h"
 #include "entity.h"
 
@@ -34,6 +35,10 @@ namespace frogger
 		static button::Button retryButton;
 		static button::Button menuButton;
 
+		static label::Label pauseLabel;
+		static label::Label winLabel;
+		static label::Label lossLabel;
+
 		void Init()
 		{
 			textures::Init();
@@ -48,6 +53,10 @@ namespace frogger
 			retryButton = button::Init(defaultPos, defaultSize, "Retry");
 			defaultPos.y += defaultSize.y * 1.5f;
 			menuButton = button::Init(defaultPos, defaultSize, "Menu");
+
+			pauseLabel = label::Init({ defaultPos.x / 1.1f,defaultPos.y / 5.0f },"Paused",60,sf::Color::Black);
+			winLabel = label::Init({ defaultPos.x / 1.4f,defaultPos.y / 5.0f },"You Won!",60,sf::Color::Black);
+			lossLabel = label::Init({ defaultPos.x / 1.4f,defaultPos.y / 5.0f },"You Lost!",60,sf::Color::Black);
 
 			Reset();
 		}
@@ -219,11 +228,15 @@ namespace frogger
 
 			if (hasWon)
 			{
-
+				label::Draw(winLabel,global::window);
+			}
+			else if(!frog::player.isAlive)
+			{
+				label::Draw(lossLabel,global::window);
 			}
 			else
 			{
-
+				label::Draw(pauseLabel,global::window);
 			}
 		}
 

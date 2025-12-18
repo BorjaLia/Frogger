@@ -14,8 +14,11 @@ namespace frogger
 
 		static button::Button returnButton;
 		static label::Label titleLabel;
-		static label::Label creditsLabel;
 		static label::Label programmerLabel;
+		static label::Label programmerLabel2;
+		static label::Label artistLabel;
+		static label::Label artistLabel2;
+		static label::Label artistLabel3;
 
 		void Init()
 		{
@@ -23,8 +26,13 @@ namespace frogger
 			returnButton = button::Init(defaultPos, defaultSize, "Return");
 
 			titleLabel = label::Init({defaultPos.x,global::screenHeight/15.0f},"Credits",25,sf::Color::Black);
-			creditsLabel = label::Init({defaultPos.x,global::screenHeight/5.0f},"Made by",15,sf::Color::Black);
-			programmerLabel = label::Init({defaultPos.x,global::screenHeight/4.0f},"Borja Lia",30,sf::Color::Black);
+
+			programmerLabel = label::Init({defaultPos.x,global::screenHeight/5.0f},"Programmer",20,sf::Color::Black);
+			programmerLabel2 = label::Init({defaultPos.x - 10.0f,global::screenHeight/4.0f},"Borja Lia",30,sf::Color::Black);
+			
+			artistLabel = label::Init({defaultPos.x,global::screenHeight/2.0f},"Artists",20,sf::Color::Black);
+			artistLabel2 = label::Init({defaultPos.x / 2.0f,global::screenHeight/1.8f},"Facundo Arrastua",30,sf::Color::Black);
+			artistLabel3 = label::Init({defaultPos.x / 1.5f,global::screenHeight/1.7f},"Celeste Bassi",30,sf::Color::Black);
 		}
 
 		void Input()
@@ -41,9 +49,15 @@ namespace frogger
 		void Draw()
 		{
 			button::Draw(returnButton);
-			label::Draw(creditsLabel,global::window);
-			label::Draw(programmerLabel,global::window);
+
 			label::Draw(titleLabel,global::window);
+
+			label::Draw(programmerLabel,global::window);
+			label::Draw(programmerLabel2,global::window);
+
+			label::Draw(artistLabel,global::window);
+			label::Draw(artistLabel2,global::window);
+			label::Draw(artistLabel3,global::window);
 		}
 	}
 }
